@@ -1,0 +1,263 @@
+ /*
+ * Problem No : A
+ * Problem Name : Lucky?
+ * Problem Link : https://codeforces.com/contest/1676/problem/A
+ */
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mehedi
+ */
+public class NewClass_A {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            String s = sc.next();
+            int x = Character.getNumericValue(s.charAt(0))+Character.getNumericValue(s.charAt(1))+Character.getNumericValue(s.charAt(2));
+            int y = Character.getNumericValue(s.charAt(s.length()-1))+Character.getNumericValue(s.charAt(s.length()-2))+Character.getNumericValue(s.charAt(s.length()-3));
+            if(x == y){
+                System.out.println("YES");
+            }
+            else{
+                System.out.println("NO");
+            }
+        }
+    }
+    
+}
+
+
+
+
+
+ /*
+ * Problem No : B
+ * Problem Name : Equal Candies
+ * Problem Link : https://codeforces.com/contest/1676/problem/B
+ */
+ 
+import java.util.Arrays;
+import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_B {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int arr[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            Arrays.sort(arr);
+            
+            long ans = 0;
+            for (int i = 1; i < n; i++) {
+                ans+=(arr[i]-arr[0]);
+            }
+            System.out.println(ans);
+        }
+    }
+    
+}
+
+
+
+
+ /*
+ * Problem No : C
+ * Problem Name : Most Similar Words
+ * Problem Link : https://codeforces.com/contest/1676/problem/C
+ */
+ 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_C {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            ArrayList<String> arr = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                arr.add(sc.next());
+            }
+            
+            int diff = Integer.MAX_VALUE;
+            int p = -1, q = -1;
+            for (int i = 0; i < n; i++) {
+                String a = arr.get(i);
+                for (int j = i+1; j < n; j++) {
+                    String b = arr.get(j);
+                    int sum = 0;
+                    for (int k = 0; k < m; k++) {
+                        sum+=Math.abs((int)a.charAt(k)-b.charAt(k));
+                    }
+                    diff = Math.min(sum, diff);
+                }
+            }
+            System.out.println(diff);
+        }
+    }
+    
+}
+
+
+
+ 
+ /*
+ * Problem No : D
+ * Problem Name : X-Sum
+ * Problem Link : https://codeforces.com/contest/1676/problem/D
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_D {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int arr[][] = new int[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    arr[i][j] = sc.nextInt();
+                }
+            }
+            
+            long ans = Long.MIN_VALUE;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    int sum = arr[i][j];
+                    int p = i-1;
+                    int q = j-1;
+                    while(p < n && q < m && p >= 0 && q >= 0){
+                        sum+=arr[p][q];             //Top-Left Segment
+                        p--;
+                        q--;
+                    }
+                    
+                    p = i-1;
+                    q = j+1;
+                    while(p < n && q < m && p >= 0 && q >= 0){
+                        sum+=arr[p][q];             //Top-Right Segment
+                        p--;
+                        q++;
+                    }
+                    
+                    p = i+1;
+                    q = j-1;
+                    while(p < n && q < m && p >= 0 && q >= 0){
+                        sum+=arr[p][q];            //Bottom-Left Segment
+                        p++;
+                        q--;
+                    }
+                    
+                    p = i+1;
+                    q = j+1;
+                    while(p < n && q < m && p >= 0 && q >= 0){
+                        sum+=arr[p][q];             //Bottom-Right Segment
+                        p++;
+                        q++;
+                    }
+                    ans = Math.max(ans, sum);
+                }
+            }
+            System.out.println(ans);
+        }
+    }
+    
+}
+
+
+
+ /*
+ * Problem No : E
+ * Problem Name : Eating Queries
+ * Problem Link : https://codeforces.com/contest/1676/problem/E
+ */ 
+ 
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mehedi
+ */
+public class NewClass_E {
+    
+    public static int binarySearch(long arr[], long num){
+        int l = 0, r = arr.length-1;
+        int mid = 0;
+        while(l <= r){
+            mid = l + (r-l)/2;
+            if(arr[mid] == num){
+                return mid;
+            }
+            
+            //Item presents in the left SubArray
+            if(num < arr[mid]){
+                r = mid - 1;
+            }
+            
+            //Item presents in the right SubArray
+            if(num > arr[mid]){
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int q = sc.nextInt();
+            long arr[] = new long[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            Arrays.sort(arr);
+            
+            long dp[] = new long[n];
+            dp[0] = arr[n-1];
+            int j = 1;
+            for (int i = n-2; i >= 0; i--) {
+                dp[j] = dp[j-1]+arr[i];
+                j++;
+            }
+            
+            while(q-- > 0){
+                long x = sc.nextLong();
+                int ans = 1 + binarySearch(dp, x);
+                if(ans > n) System.out.println(-1);
+                else        System.out.println(ans);
+            }
+        }
+    }
+    
+}
