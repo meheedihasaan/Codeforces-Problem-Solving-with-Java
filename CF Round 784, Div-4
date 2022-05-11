@@ -1,0 +1,254 @@
+ /*
+ * Problem No : A
+ * Problem Name : Division?
+ * Problem Link : https://codeforces.com/contest/1669/problem/A
+ */
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mehedi
+ */
+public class NewClass_A {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            if(n <= 1399){
+                System.out.println("Division 4");
+            }
+            else if(n <= 1599 && n >= 1400){
+                System.out.println("Division 3");
+            }
+            else if(n <= 1899 && n >= 1600){
+                System.out.println("Division 2");
+            }
+            else if(n >= 1900){
+                System.out.println("Division 1");
+            }
+        }
+    }
+    
+}
+
+
+
+
+
+ /*
+ * Problem No : B
+ * Problem Name : Triple
+ * Problem Link : https://codeforces.com/contest/1669/problem/B
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_B {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        k:
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int freq[] = new int[n+1];
+            for (int i = 0; i < n; i++) {
+                freq[sc.nextInt()]++;
+            }
+            
+            for (int i = 0; i <= n; i++) {
+                if(freq[i] >= 3){
+                    System.out.println(i);
+                    continue k;
+                }
+            }
+            System.out.println(-1);
+        }
+        
+    }
+    
+}
+ 
+ 
+ 
+ 
+ 
+ /*
+ * Problem No : C
+ * Problem Name : Odd/Even Increments
+ * Problem Link : https://codeforces.com/contest/1669/problem/C
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_C {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int arr[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            
+            boolean flag = true;
+            int x = arr[0]%2;
+            for (int i = 2; i < n; i+=2) {
+                if(arr[i]%2 != x){
+                    flag = false;
+                }
+            }
+            
+            int y = arr[1]%2;
+            for (int i = 1; i < n; i+=2) {
+                if(arr[i]%2 != y){
+                    flag = false;
+                }
+            }
+            
+            if(flag){
+                System.out.println("YES");
+            }
+            else{
+                System.out.println("NO");
+            }
+        }
+    }
+    
+}
+ 
+ 
+ 
+ 
+ 
+ /*
+ * Problem No : D
+ * Problem Name : Colorful Stamp
+ * Problem Link : https://codeforces.com/contest/1669/problem/D
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_D {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            String s = sc.next().toUpperCase();
+            if(n == 1 && s.charAt(0) != 'W'){
+                System.out.println("NO");
+                continue;
+            }
+            
+            int r = 0, b = 0;
+            boolean flag = true;
+            for (int i = 0; i < s.length(); i++) {
+                if(s.charAt(i) == 'W' && i != 0){
+                    if(r == 0 && b > 0){
+                        flag = false;
+                        break;
+                    }                    
+                    if(b == 0 && r > 0){
+                        flag = false;
+                        break;
+                    }
+                    r = 0;
+                    b = 0;
+                }
+                if(s.charAt(i) == 'R'){
+                    r++;
+                }
+                else if(s.charAt(i) == 'B'){
+                    b++;
+                }
+            }
+            
+            if(b == 0 && r > 0) flag = false;
+            if(r == 0 && b > 0) flag = false;
+            
+            if(flag) System.out.println("YES");
+            else     System.out.println("NO");
+        }
+    }
+    
+}
+ 
+ 
+ 
+ 
+ 
+ /*
+ * Problem No : F
+ * Problem Name : Eating Candies
+ * Problem Link : https://codeforces.com/contest/1669/problem/F
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_F {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int arr[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            
+            long alice = arr[0];
+            long bob = arr[n-1];
+            int l = 0;
+            int r = n-1;
+            int ans = 0;
+            
+            //Apply Binary Search
+            while(l < r){
+                if(alice == bob){
+                    ans = l+1+n-r;
+                    //System.out.println(l+" "+r);
+                }
+                
+                if(alice <= bob){
+                    l++;
+                    alice+=arr[l];
+                }
+                else if(alice > bob){
+                    r--;
+                    bob+=arr[r];
+                }
+            }
+            System.out.println(ans);
+        }
+    }
+    
+}
+ 
+ 
+ 
+ 
+ 
