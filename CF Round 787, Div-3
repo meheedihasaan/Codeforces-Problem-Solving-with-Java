@@ -1,0 +1,137 @@
+ /*
+ * Problem No : A
+ * Problem Name : Food For Animals
+ * Problem Link : https://codeforces.com/contest/1675/problem/A
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_A {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        k:
+        while(T-- > 0){
+            long a = sc.nextLong();
+            long b = sc.nextLong();
+            long c = sc.nextLong();
+            long x = sc.nextLong();
+            long y = sc.nextLong();
+            
+            long m = a+c;
+            if(m < x){
+                System.out.println("NO");
+                continue k;
+            }
+            
+            if(a < x){
+                c-=(x-a);
+            }
+            
+            long n = b+c;
+            if(n < y){
+                System.out.println("NO");
+                continue k;
+            }
+            System.out.println("YES");
+        }
+    }
+    
+}
+
+
+
+
+
+
+ /*
+ * Problem No : B
+ * Problem Name : Make It Increasing
+ * Problem Link : https://codeforces.com/contest/1675/problem/B
+ */
+ 
+ import java.util.Scanner;
+
+/**
+ *
+ * @author Mehedi
+ */
+public class NewClass_B {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int arr[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            
+            int ans = 0;
+            for (int i = n-2; i >= 0; i--) {
+                int x = arr[i+1];
+                if(x == 0){
+                    ans = -1;
+                    break;
+                }
+                while(arr[i] >= x){
+                    arr[i]/=2;
+                    ans++;
+                }
+            }
+            System.out.println(ans);
+        }
+    }
+     
+}
+ 
+ 
+ 
+ 
+ 
+ /*
+ * Problem No : C
+ * Problem Name : Detective Task
+ * Problem Link : https://codeforces.com/contest/1675/problem/C
+ */
+ 
+ import java.util.Scanner;
+
+ /**
+ *
+ * @author Mehedi
+ */
+public class NewClass_C {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            char ch[] = sc.next().toCharArray();
+            int left = ch.length-1;
+            for (int i = 0; i < ch.length; i++) {
+                if(ch[i] == '0'){
+                    left = i;
+                    break;
+                }
+            }
+            
+            int right = 0;
+            for (int i = ch.length-1; i >= 0; i--) {
+                if(ch[i] == '1'){
+                    right = i;
+                    break;
+                }
+            }
+            
+            System.out.println(Math.abs(left-right)+1);
+        }
+    }
+    
+}
