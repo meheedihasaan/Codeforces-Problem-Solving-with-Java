@@ -1,0 +1,188 @@
+ /*
+ * Problem No : A
+ * Problem Name : Forbidden Sequence
+ * Problem Link : https://codeforces.com/contest/1617/problem/A
+ */
+ 
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mehedi
+ */
+public class ForbiddenSubsequence {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            String s = sc.next();
+            String a = sc.next();
+            char ch[] = s.toCharArray();
+            Arrays.sort(ch);
+            int freq[] = new int[26];
+            for (int i = 0; i < ch.length; i++) {
+                freq[ch[i]-'a']++;
+            }
+            
+            if(freq[0] == 0 || freq[1] == 0 || freq[2] == 0){
+                System.out.println(ch);
+            }
+            else{
+                if(!a.equals("abc")){
+                    System.out.println(ch);
+                }
+                else{
+                    for (int i = 0; i < freq[0]; i++)System.out.print('a');
+                    for (int i = 0; i < freq[2]; i++)System.out.print('c');
+                    for (int i = 0; i < freq[1]; i++)System.out.print('b');
+                    for (int i = 3; i < 26; i++) {
+                        for (int j = 0; j < freq[i]; j++) {
+                            System.out.print((char)('a'+i));
+                        }
+                    }
+                    System.out.println();
+                }
+            }
+        }
+    }
+    
+}
+ 
+ 
+ 
+ 
+ /*
+ * Problem No : B
+ * Problem Name : GCD Problem
+ * Problem Link : https://codeforces.com/contest/1617/problem/B
+ */
+ 
+ import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class GCD_Problem {
+    
+    public static void main(String[] args) {
+        ArrayList<Integer> prime = new ArrayList<>();
+        prime.add(2);
+        for (int i = 3; i <= 1000001; i++) {
+            boolean flag = true;
+            for (int j = 2; j*j <= i; j++) {
+                if(i%j == 0){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                prime.add(i);
+            }
+        }
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            if(n%2 == 0){
+                int c = 1;
+                n--;
+                int b = n/2;
+                int a = b+1;
+                System.out.println(a+" "+b+" "+c);
+            }
+            else{
+                int c = 1;
+                n--;
+                int b = 0;
+                int a = 0;
+                for (int i = 0; i < prime.size(); i++) {
+                    if((n-prime.get(i))%prime.get(i) != 0){
+                        b = prime.get(i);
+                        a = n-prime.get(i);
+                        break;
+                    }
+                }
+                System.out.println(a+" "+b+" "+c);
+            }
+        }
+    }
+    
+}
+ 
+ 
+ 
+ /*
+ * Problem No : C
+ * Problem Name : Paprika and Permutaiton
+ * Problem Link : https://codeforces.com/contest/1617/problem/C
+ */
+ 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mehedi
+ */
+public class PaprikaAndPermutation_C {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            ArrayList<Integer> arr = new ArrayList<Integer>();
+            for (int i = 0; i < n; i++) {
+                int a = sc.nextInt();
+                arr.add(a);
+            }
+            
+            Collections.sort(arr);
+            ArrayList<Integer> A = new ArrayList<Integer>();
+            ArrayList<Integer> B = new ArrayList<Integer>();
+            HashSet<Integer> set = new HashSet<>();
+            for (int i = 0; i < n; i++) {
+                if(set.contains(arr.get(i)) || arr.get(i) > n){
+                    A.add(arr.get(i));
+                }
+                else{
+                    set.add(arr.get(i));
+                }
+            }
+            
+            for (int i = 1; i <= n; i++) {
+                if(!set.contains(i)){
+                    B.add(i);
+                }
+            }
+            
+            if(A.isEmpty()){
+                System.out.println(0);
+            }
+            else{
+                boolean flag = true;
+                for (int i = 0; i < A.size(); i++) {
+                    if((A.get(i)+1)/2 <= B.get(i)){
+                       flag = false;
+                       break;
+                    }
+                }
+                if(flag){
+                    System.out.println(A.size());
+                }
+                else{
+                    System.out.println(-1);
+                }
+            }
+        }
+    }
+    
+}
+ 
+ 
