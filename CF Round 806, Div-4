@@ -1,0 +1,185 @@
+/**
+Problem Name: Yes or Yes?
+Problem Link: https://codeforces.com/contest/1703/problem/A 
+*/
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class NewClass_A {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            String s = sc.next().toUpperCase();
+            if(s.equals("YES")){
+                System.out.println("YES");
+            }
+            else{
+                System.out.println("NO");
+            }
+        }
+    }
+    
+}
+
+
+
+
+/**
+Problem Name: ICPC Ballons
+Problem Link: https://codeforces.com/contest/1703/problem/B
+*/
+
+import java.util.HashSet;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class NewClass_B {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            String s = sc.next();
+            HashSet<Character> set = new HashSet<>();
+            for (int i = 0; i < s.length(); i++) {
+                set.add(s.charAt(i));
+            }
+            System.out.println(s.length()+set.size());
+        }
+    }
+    
+}
+
+
+
+/**
+Problem Name: Cypher
+Problem Link: https://codeforces.com/contest/1703/problem/C
+*/
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class Cypher_C {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int arr[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            StringBuilder ans = new StringBuilder();
+            for(int i = 0; i < n; i++){
+                int m = sc.nextInt();
+                String s = sc.next();
+                int u = 0;
+                int d = 0;
+                for (int j = 0; j < m; j++) {
+                    if(s.charAt(j) == 'U') u++;
+                    else                   d++;
+                }
+                
+                int moves = 0;
+                if(u > d){
+                    moves = u-d;
+                    if(arr[i]-moves >= 0){
+                        arr[i]-=moves;
+                    }
+                    else{
+                        arr[i] = 10-(moves-arr[i]);
+                    }
+                    ans.append(arr[i]+" ");
+                }
+                else if(u < d){
+                    moves = d-u;
+                    if(arr[i]+moves <= 9){
+                        arr[i]+=moves;
+                    }
+                    else{
+                        arr[i] = (arr[i]+moves)-10;
+                    }
+                    ans.append(arr[i]+" ");
+                }
+                else if(u == d){
+                    ans.append(arr[i]+" ");
+                }
+            }
+            System.out.println(ans.toString());
+        }
+    }
+    
+}
+
+
+
+
+/**
+Problem Name: Double String
+Problem Link: https://codeforces.com/contest/1703/problem/D
+*/
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class TwoStrings_D {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            ArrayList<String> arr = new ArrayList<>();
+            HashSet<String> set = new HashSet<>();
+            for (int i = 0; i < n; i++) {
+                arr.add(sc.next());
+                set.add(arr.get(i));
+            }
+            
+            StringBuilder ans = new StringBuilder();
+            for (int i = 0; i < n; i++) {
+                String s = arr.get(i);
+                StringBuilder left = new StringBuilder();
+                StringBuilder right = new StringBuilder(s);
+                boolean flag = false;
+                for (int j = 0; j < s.length()-1; j++) {
+                    left.append(s.charAt(j));
+                    right.deleteCharAt(0);
+                    if(set.contains(left.toString()) && set.contains(right.toString())){
+                        flag = true;
+                        break;
+                    }
+                }
+                if(flag){
+                    ans.append(1);
+                }
+                else{
+                    ans.append(0);
+                }
+            }
+            System.out.println(ans.toString());
+        }
+    }
+    
+}
+
