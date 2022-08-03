@@ -1,0 +1,220 @@
+/**
+Problem Name: Round Down The Prices?
+Problem Link: https://codeforces.com/contest/1702/problem/A
+*/
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class NewClass_A {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            long n = sc.nextLong();
+            long x = 1;
+            while(true){
+                x*=10;
+                if(x > n){
+                    x/=10;
+                    break;
+                }
+            }
+            System.out.println(n-x);
+        }
+    }
+    
+}
+
+
+
+
+/**
+Problem Name: Polycard writes a string from memory
+Problem Link: https://codeforces.com/contest/1702/problem/C
+*/
+
+
+
+/**
+Problem Name: Polycard writes a string from memory
+Problem Link: https://codeforces.com/contest/1702/problem/B
+*/
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class NewClass_B {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            String s = sc.next();
+            int cnt = 0;
+            ArrayList<Character> ch = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if(!ch.contains(s.charAt(i))){
+                    ch.add(s.charAt(i));
+                }
+                
+                if(ch.size() == 4){
+                    cnt++;
+                    ch.clear();
+                    i--;
+                }
+            }
+            if(ch.size() > 0){
+                cnt++;
+            }
+            System.out.println(cnt);
+        }
+    }
+    
+}
+
+
+
+
+/**
+Problem Name: Train and Queries
+Problem Link: https://codeforces.com/contest/1702/problem/C
+*/
+
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class NewClass_C {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-- > 0){
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            int arr[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            
+            HashMap<Integer, Integer> left = new HashMap<>();
+            HashMap<Integer, Integer> right = new HashMap<>();
+            for (int i = 0; i < n; i++) {
+                if(!left.containsKey(arr[i])){
+                    left.put(arr[i], i);      //Put the left most index of arr[i]
+                    right.put(arr[i], i);     //Put the right most index of arr[i]
+                }
+                else{
+                    right.put(arr[i], i);     //If arr[i] is found again then reset the right most index
+                }
+            }
+            
+            while(k--> 0){
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+                if(left.containsKey(a) && right.containsKey(b)){
+                    if(left.get(a) <= right.get(b)){
+                        System.out.println("YES");
+                    }
+                    else{
+                        System.out.println("NO");
+                    }
+                }
+                else{
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/**
+Problem Name: Not A Cheap String
+Problem Link: https://codeforces.com/contest/1702/problem/D
+*/
+
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Acer
+ */
+public class NewClass_D {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        k:
+        while(T-- > 0){
+            String s = sc.next();
+            int p = sc.nextInt();
+            char ch[] = s.toCharArray();
+            int total = 0;
+            for (int i = 0; i < s.length(); i++) {
+                total+=(ch[i]-'a'+1);
+            }
+            
+            Arrays.sort(ch);
+            int j = ch.length-1;
+           //System.out.println(total);
+            HashMap<Character, Integer> map = new HashMap<>();
+            while(total > p){
+                total = total - ((int)ch[j]-'a'+1);
+                if(map.containsKey(ch[j])){
+                    map.put(ch[j], map.get(ch[j])+1);
+                }
+                else{
+                    map.put(ch[j], 1);
+                }
+                j--;
+                if(j == -1){
+                    System.out.println();
+                    continue k;
+                }
+            }
+            //System.out.println(map.get('z'));
+            StringBuilder str = new StringBuilder();
+            //System.out.println(map.size());
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if(map.containsKey(c)){
+                    map.put(c, map.get(c)-1);
+                    if(map.get(c) == 0){
+                        map.remove(c);
+                    }
+                }
+                else{
+                    str.append(c);
+                }
+            }
+            System.out.println(str.toString());
+        }
+    }
+    
+}
+   
+   
+
+
+
